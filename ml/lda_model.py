@@ -38,7 +38,7 @@ def train_lda(bow_matrix, n_topics=5, max_iter=25, random_state=42):
         learning_method='online',
         learning_offset=50.0,
         random_state=random_state,
-        n_jobs=-1
+        n_jobs=None
     )
     lda.fit(bow_matrix)
 
