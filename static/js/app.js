@@ -167,6 +167,20 @@ function detectSiteFromUrl(url) {
     return SUPPORTED_SITES.find(site => lower.includes(site.domain)) || null;
 }
 
+window.loadSavedSampleUrls = function() {
+    const saved = [
+        'https://www.flipkart.com/apple-iphone-15-black-128-gb/p/itm6ac6485515ae4?pid=MOBGTAGPTB3VS24W',
+        'https://www.snapdeal.com/product/life-like-a10-pro-in/661262075466'
+    ];
+    for (let i = 1; i <= 2; i++) {
+        const input = document.getElementById(`url-input-${i}`);
+        if (input) {
+            input.value = saved[i - 1];
+            if (window.detectSite) window.detectSite(i);
+        }
+    }
+};
+
 window.detectSite = function(inputIdx) {
     const input = document.getElementById(`url-input-${inputIdx}`);
     const badge = document.getElementById(`site-badge-${inputIdx}`);
@@ -174,13 +188,14 @@ window.detectSite = function(inputIdx) {
     const status = document.getElementById(`url-status-${inputIdx}`);
     if (!input || !badge) return;
 
+    const iconEl = badge.querySelector('.site-icon');
     const val = input.value.trim();
     if (!val) {
         badge.className = 'site-badge';
-        badge.querySelector('.site-icon').textContent = '🔗';
-        nameEl.textContent = `Site ${inputIdx}`;
+        if (iconEl) iconEl.textContent = '🔗';
+        if (nameEl) nameEl.textContent = `Site ${inputIdx}`;
         input.classList.remove('url-valid', 'url-invalid');
-        status.textContent = '';
+        if (status) status.textContent = '';
         return;
     }
 
@@ -189,21 +204,25 @@ window.detectSite = function(inputIdx) {
     
     if (site) {
         badge.classList.add(`site-${site.id}`);
-        badge.querySelector('.site-icon').textContent = site.icon;
-        nameEl.textContent = site.name;
+        if (iconEl) iconEl.textContent = site.icon;
+        if (nameEl) nameEl.textContent = site.name;
         input.classList.remove('url-invalid');
         input.classList.add('url-valid');
-        status.textContent = '✔';
-        status.style.color = '#10b981';
+        if (status) {
+            status.textContent = '✔';
+            status.style.color = '#10b981';
+        }
     } else {
         badge.classList.add('site-unknown');
-        badge.querySelector('.site-icon').textContent = '❓';
-        nameEl.textContent = 'Unknown';
+        if (iconEl) iconEl.textContent = '❓';
+        if (nameEl) nameEl.textContent = 'Unknown';
         input.classList.add('url-invalid');
-        status.textContent = '❌';
-        status.style.color = '#ef4444';
+        if (status) {
+            status.textContent = '❌';
+            status.style.color = '#ef4444';
+        }
     }
-}
+};
 
 function startScrapeAnalysis() {
     const urls = [];

@@ -861,8 +861,12 @@
 
             <!-- URL Input Card -->
             <div class="card" style="padding:2rem; margin-bottom:1.5rem;">
-                <h3 style="margin-top:0; font-family:'Playfair Display',serif; font-size:1.2rem; margin-bottom:0.4rem;">
-                    Product URLs</h3>
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.4rem;">
+                    <h3 style="margin:0; font-family:'Playfair Display',serif; font-size:1.2rem;">Product URLs</h3>
+                    <button type="button" class="btn btn-outline btn-sm" onclick="loadSavedSampleUrls()" style="font-size:0.78rem; padding:0.35rem 0.8rem; border-radius:var(--radius-pill); cursor:pointer; background:var(--bg-subtle); border:1px solid var(--border-light); font-weight:600;">
+                        📋 Load Saved Links
+                    </button>
+                </div>
                 <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:1.5rem;">
                     Supported sites: <strong>Flipkart</strong>, <strong>Snapdeal</strong>, <strong>Myntra</strong>,
                     <strong>Amazon</strong>. The first two are required.
@@ -871,6 +875,7 @@
                 <!-- URL Row Template -->
                 <div class="url-row" id="url-row-1">
                     <div class="url-site-badge" id="site-badge-1">
+                        <span class="site-icon">🔗</span>
                         <span class="site-name" id="site-name-1">Site 1</span>
                     </div>
                     <div style="flex:1; position:relative;">
@@ -882,6 +887,7 @@
 
                 <div class="url-row" id="url-row-2">
                     <div class="url-site-badge" id="site-badge-2">
+                        <span class="site-icon">🔗</span>
                         <span class="site-name" id="site-name-2">Site 2</span>
                     </div>
                     <div style="flex:1; position:relative;">
@@ -892,7 +898,8 @@
                 </div>
 
                 <div class="url-row" id="url-row-3">
-                    <div class="url-site-badge" id="site-badge-2">
+                    <div class="url-site-badge" id="site-badge-3">
+                        <span class="site-icon">🔗</span>
                         <span class="site-name" id="site-name-3">Site 3 (Optional)</span>
                     </div>
                     <div style="flex:1; position:relative;">
@@ -903,7 +910,8 @@
                 </div>
 
                 <div class="url-row" id="url-row-4">
-                    <div class="url-site-badge" id="site-badge-2">
+                    <div class="url-site-badge" id="site-badge-4">
+                        <span class="site-icon">🔗</span>
                         <span class="site-name" id="site-name-4">Site 4 (Optional) </span>
                     </div>
                     <div style="flex:1; position:relative;">

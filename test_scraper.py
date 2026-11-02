@@ -1,3 +1,5 @@
+import sys
+sys.stdout.reconfigure(encoding='utf-8')
 from ml.scraper import scrape_reviews
 import logging
 
@@ -5,7 +7,7 @@ logging.basicConfig(level=logging.INFO)
 
 urls = [
     "https://www.flipkart.com/apple-iphone-15-black-128-gb/p/itm6ac6485515ae4?pid=MOBGTAGPTB3VS24W",
-    "https://www.snapdeal.com/product/apple-iphone-14-128gb/674920888066"
+    "https://www.snapdeal.com/product/life-like-a10-pro-in/661262075466"
 ]
 
 try:

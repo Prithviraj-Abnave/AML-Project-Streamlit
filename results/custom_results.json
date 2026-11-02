@@ -1,12 +1,12 @@
 {
   "meta": {
-    "total_reviews": 40,
-    "processed_reviews": 34,
+    "total_reviews": 25,
+    "processed_reviews": 23,
     "sample_size": null,
-    "n_topics": 5,
-    "total_time": 17.42,
-    "vocabulary_size_bow": 30,
-    "vocabulary_size_tfidf": 30
+    "n_topics": 3,
+    "total_time": 16.37,
+    "vocabulary_size_bow": 38,
+    "vocabulary_size_tfidf": 38
   },
   "lda": {
     "topics": [
@@ -14,64 +14,64 @@
         "id": 0,
         "top_words": [
           {
-            "word": "capacity",
-            "weight": 0.110281
+            "word": "earbud",
+            "weight": 0.081014
           },
           {
-            "word": "mah",
-            "weight": 0.109152
+            "word": "deliver",
+            "weight": 0.058257
           },
           {
-            "word": "powerbank",
-            "weight": 0.074276
+            "word": "devarabeesanahalli",
+            "weight": 0.038886
           },
           {
-            "word": "quality",
-            "weight": 0.071838
+            "word": "audio",
+            "weight": 0.038663
           },
           {
-            "word": "build quality",
-            "weight": 0.026909
+            "word": "road",
+            "weight": 0.038553
           },
           {
-            "word": "flipkart",
-            "weight": 0.02689
+            "word": "road devarabeesanahalli",
+            "weight": 0.038439
           },
           {
-            "word": "backup",
-            "weight": 0.026266
+            "word": "pair",
+            "weight": 0.038426
           },
           {
-            "word": "value money",
-            "weight": 0.026061
+            "word": "outer",
+            "weight": 0.038281
           },
           {
-            "word": "design",
-            "weight": 0.025823
+            "word": "ring road",
+            "weight": 0.038221
           },
           {
-            "word": "satisfied",
-            "weight": 0.025578
+            "word": "powerful",
+            "weight": 0.03822
           },
           {
-            "word": "power",
-            "weight": 0.025497
+            "word": "outer ring",
+            "weight": 0.037851
           },
           {
-            "word": "charging",
-            "weight": 0.025311
+            "word": "devarabeesanahalli village",
+            "weight": 0.03755
           },
           {
-            "word": "first",
-            "weight": 0.024924
+            "word": "happy",
+            "weight": 0.037449
           },
           {
-            "word": "support",
-            "weight": 0.02469
+            "word": "village",
+            "weight": 0.037395
           },
           {
-            "word": "take",
-            "weight": 0.024278
+            "word": "ring",
+            "weight": 0.037222
           }
         ]
       },
@@ -79,64 +79,64 @@
         "id": 1,
         "top_words": [
           {
-            "word": "power bank",
-            "weight": 0.110855
+            "word": "storage",
+            "weight": 0.081578
           },
           {
-            "word": "power",
-            "weight": 0.110385
+            "word": "color",
+            "weight": 0.080803
           },
           {
-            "word": "bank",
-            "weight": 0.110275
+            "word": "battery",
+            "weight": 0.067012
           },
           {
-            "word": "price",
-            "weight": 0.110103
+            "word": "camera",
+            "weight": 0.066258
           },
           {
-            "word": "quality",
-            "weight": 0.062542
+            "word": "iphone",
+            "weight": 0.052226
           },
           {
-            "word": "first",
-            "weight": 0.06206
+            "word": "battery life",
+            "weight": 0.038611
           },
           {
-            "word": "mah",
-            "weight": 0.043067
+            "word": "charging",
+            "weight": 0.038392
           },
           {
-            "word": "flipkart",
-            "weight": 0.037126
+            "word": "display",
+            "weight": 0.038375
           },
           {
-            "word": "value",
-            "weight": 0.036901
+            "word": "blue",
+            "weight": 0.038102
           },
           {
-            "word": "fast",
-            "weight": 0.036599
-          },
-          {
-            "word": "mobile",
-            "weight": 0.03655
-          },
-          {
-            "word": "capacity",
-            "weight": 0.018231
+            "word": "color blue",
+            "weight": 0.037881
           },
           {
             "word": "backup",
-            "weight": 0.013852
+            "weight": 0.037665
           },
           {
-            "word": "build quality",
-            "weight": 0.01332
+            "word": "blue storage",
+            "weight": 0.037609
           },
           {
-            "word": "support",
-            "weight": 0.013276
+            "word": "audio",
+            "weight": 0.037454
+          },
+          {
+            "word": "photography",
+            "weight": 0.037358
+          },
+          {
+            "word": "life",
+            "weight": 0.037347
           }
         ]
       },
@@ -144,238 +144,96 @@
         "id": 2,
         "top_words": [
           {
+            "word": "internet private",
+            "weight": 0.052913
+          },
+          {
+            "word": "village",
+            "weight": 0.052415
+          },
+          {
+            "word": "limited",
+            "weight": 0.052188
+          },
+          {
+            "word": "private",
+            "weight": 0.051883
+          },
+          {
+            "word": "flipkart internet",
+            "weight": 0.051824
+          },
+          {
+            "word": "private limited",
+            "weight": 0.051684
+          },
+          {
             "word": "flipkart",
-            "weight": 0.094925
+            "weight": 0.051269
           },
           {
-            "word": "value money",
-            "weight": 0.094903
+            "word": "internet",
+            "weight": 0.051257
           },
           {
-            "word": "value",
-            "weight": 0.094341
+            "word": "outer",
+            "weight": 0.032916
           },
           {
-            "word": "money",
-            "weight": 0.093308
-          },
-          {
-            "word": "build",
-            "weight": 0.057121
-          },
-          {
-            "word": "build quality",
-            "weight": 0.056932
+            "word": "devarabeesanahalli village",
+            "weight": 0.032813
           },
           {
             "word": "quality",
-            "weight": 0.05641
+            "weight": 0.032813
           },
           {
-            "word": "fast",
-            "weight": 0.023277
+            "word": "ring",
+            "weight": 0.032717
           },
           {
-            "word": "premium",
-            "weight": 0.022043
+            "word": "road devarabeesanahalli",
+            "weight": 0.032587
           },
           {
-            "word": "look",
-            "weight": 0.021829
+            "word": "outer ring",
+            "weight": 0.032558
           },
           {
-            "word": "satisfied",
-            "weight": 0.021091
-          },
-          {
-            "word": "power bank",
-            "weight": 0.021014
-          },
-          {
-            "word": "highly",
-            "weight": 0.021005
-          },
-          {
-            "word": "bank",
-            "weight": 0.020439
-          },
-          {
-            "word": "design",
-            "weight": 0.020167
-          }
-        ]
-      },
-      {
-        "id": 3,
-        "top_words": [
-          {
-            "word": "charge",
-            "weight": 0.136815
-          },
-          {
-            "word": "quality",
-            "weight": 0.061588
-          },
-          {
-            "word": "backup",
-            "weight": 0.0607
-          },
-          {
-            "word": "mah",
-            "weight": 0.058693
-          },
-          {
-            "word": "charging",
-            "weight": 0.058446
-          },
-          {
-            "word": "premium",
-            "weight": 0.05802
-          },
-          {
-            "word": "satisfied",
-            "weight": 0.057642
-          },
-          {
-            "word": "first",
-            "weight": 0.057381
-          },
-          {
-            "word": "power",
-            "weight": 0.02911
-          },
-          {
-            "word": "bank",
-            "weight": 0.023066
-          },
-          {
-            "word": "money",
-            "weight": 0.021875
-          },
-          {
-            "word": "powerbank",
-            "weight": 0.021672
-          },
-          {
-            "word": "design",
-            "weight": 0.021642
-          },
-          {
-            "word": "fast charging",
-            "weight": 0.021533
-          },
-          {
-            "word": "power bank",
-            "weight": 0.021441
-          }
-        ]
-      },
-      {
-        "id": 4,
-        "top_words": [
-          {
-            "word": "power",
-            "weight": 0.112061
-          },
-          {
-            "word": "power bank",
-            "weight": 0.084092
-          },
-          {
-            "word": "bank",
-            "weight": 0.08395
-          },
-          {
-            "word": "fast",
-            "weight": 0.062104
-          },
-          {
-            "word": "charge",
-            "weight": 0.061287
-          },
-          {
-            "word": "charging",
-            "weight": 0.055504
-          },
-          {
-            "word": "time",
-            "weight": 0.049854
-          },
-          {
-            "word": "fast charging",
-            "weight": 0.043884
-          },
-          {
-            "word": "design",
-            "weight": 0.043294
-          },
-          {
-            "word": "quality",
-            "weight": 0.037278
-          },
-          {
-            "word": "backup",
-            "weight": 0.03696
-          },
-          {
-            "word": "battery",
-            "weight": 0.032143
-          },
-          {
-            "word": "mah",
-            "weight": 0.031772
-          },
-          {
-            "word": "look",
-            "weight": 0.026709
-          },
-          {
-            "word": "take",
-            "weight": 0.026501
+            "word": "devarabeesanahalli",
+            "weight": 0.032436
           }
         ]
       }
     ],
     "prevalence": [
-      0.1471,
-      0.1765,
-      0.1176,
-      0.0588,
-      0.5
+      0.2174,
+      0.6522,
+      0.1304
     ],
     "representative_reviews": {
       "0": [
-        "Review for: Capacity 10000 mAh \u2022 Color Midnight Black",
-        "Review for: Capacity 10000 mAh \u2022 Color Metallic Blue",
-        "One of the best powerbank under budget and also quality wise it is the great product mine old one got stolen by my friend then i got this one it wis so good ports are comparatively enough 2 usb and one c port and also there is led indicator which indicates battry percentage and also it is durable an..."
+        "Outer Ring Road, Devarabeesanahalli Village,",
+        "The heavy audio output from this earbud pair is powerful.",
+        "I am very happy with the earbud because they deliver."
       ],
       "1": [
-        "Excellent Mi 3i 10000 mAh power bank. Low price but high quality product. Best seller Retail Net No.1 product quality at reasonable price and fast shipping, recommended this seller. Yes Flipkart servi... more",
-        "This is my second Mi power bank. First one served for almost 3 years. This one is also well built and works perfectly as advertised. Value for \ud83d\udcb0",
-        "Very nice product just go for it and its price is also good if you are thinking to buy a power bank so just go for this."
+        "Awesome product very happy to hold this. Better In hand feel,matte finish. Good camera, Brighter screen with Dynamic Island, USB-C, great battery life. 60Hz display is a dealbreaker for some.Its not... more",
+        "Review for: Color Blue \u2022 Storage 256 GB",
+        "Review for: Color Blue \u2022 Storage 128 GB"
       ],
       "2": [
-        "Good build quality Value for money",
-        "Awesome Colour \ud83d\ude0d and value for money product \ud83e\udd19",
-        "Flipkart Internet Private Limited,"
-      ],
-      "3": [
-        "Perfect delivery. Good Product from MI. Metal body feels premium. I'm using galaxy s9 plus with 3500 mah and can charge a 2 full charge and 40% charge. Satisfied with the backup",
-        "Awesome quality & first charging\u261d\ufe0f\ud83d\udd25\u2764\ud83d\ude0d\ud83d\udc4d",
-        ", Sri Potti Sriramulu Nellore District"
-      ],
-      "4": [
-        "Xiaomi Power Bank 4i 10000mAh \u2013 Review \u2b50\u2b50\u2b50\u2b50\u2b50 The Xiaomi Power Bank 4i is a compact and reliable power bank that is perfect for everyday use. Its 10,000mAh capacity provides enough backup to keep your smartphone charged while travelling, working, or during power cuts. The 22.5W fast charging is a gre...",
-        "Bought the Redmi 10000mAh power bank from Myntra, totally worth the money! Great build quality, compact design, and charges fast. Superb product, highly satisfied!",
-        "Battery power bank is many times more than you think. That's why friends, while taking power bank, take this Mai's power bank without thinking."
+        "Flipkart Internet Private Limited, Buildings Alyssa, Begonia & Clove Embassy Tech Village, Outer Ring Road, Devarabeesanahalli Village, Bengaluru, 560103, Karnataka, India",
+        "Flipkart Internet Private Limited,",
+        "Very powerful and much quality appreciate"
       ]
     },
     "metrics": {
-      "coherence": 0.4895,
-      "diversity": 0.5,
-      "perplexity": 47.98
+      "coherence": 0.5129,
+      "diversity": 0.9667,
+      "perplexity": 68.23
     },
-    "training_time": 3.61
+    "training_time": 5.28
   },
   "nmf": {
     "topics": [
@@ -383,64 +241,64 @@
         "id": 0,
         "top_words": [
           {
-            "word": "power",
-            "weight": 0.194005
+            "word": "storage",
+            "weight": 0.345442
           },
           {
-            "word": "power bank",
-            "weight": 0.176836
+            "word": "color",
+            "weight": 0.345442
           },
           {
-            "word": "bank",
-            "weight": 0.176836
+            "word": "blue storage",
+            "weight": 0.103039
           },
           {
-            "word": "quality",
-            "weight": 0.092558
+            "word": "color blue",
+            "weight": 0.103039
           },
           {
-            "word": "first",
-            "weight": 0.064685
+            "word": "blue",
+            "weight": 0.103039
+          },
+          {
+            "word": "charging",
+            "weight": 0.0
           },
           {
             "word": "backup",
-            "weight": 0.049763
+            "weight": 0.0
           },
           {
-            "word": "price",
-            "weight": 0.043391
-          },
-          {
-            "word": "powerbank",
-            "weight": 0.040568
-          },
-          {
-            "word": "highly",
-            "weight": 0.04054
-          },
-          {
-            "word": "value",
-            "weight": 0.023679
-          },
-          {
-            "word": "satisfied",
-            "weight": 0.02056
-          },
-          {
-            "word": "design",
-            "weight": 0.020183
+            "word": "photography",
+            "weight": 0.0
           },
           {
             "word": "battery",
-            "weight": 0.01907
+            "weight": 0.0
           },
           {
-            "word": "build quality",
-            "weight": 0.008495
+            "word": "display",
+            "weight": 0.0
           },
           {
-            "word": "build",
-            "weight": 0.008495
+            "word": "camera",
+            "weight": 0.0
+          },
+          {
+            "word": "battery life",
+            "weight": 0.0
+          },
+          {
+            "word": "life",
+            "weight": 0.0
+          },
+          {
+            "word": "happy",
+            "weight": 0.0
+          },
+          {
+            "word": "clarity",
+            "weight": 0.0
           }
         ]
       },
@@ -448,64 +306,64 @@
         "id": 1,
         "top_words": [
           {
-            "word": "charge",
-            "weight": 0.206548
+            "word": "camera",
+            "weight": 0.467733
           },
           {
-            "word": "time",
-            "weight": 0.166304
+            "word": "iphone",
+            "weight": 0.397099
           },
           {
-            "word": "take",
-            "weight": 0.093635
+            "word": "life",
+            "weight": 0.03015
           },
           {
-            "word": "mobile",
-            "weight": 0.092259
+            "word": "battery life",
+            "weight": 0.03015
+          },
+          {
+            "word": "display",
+            "weight": 0.029884
+          },
+          {
+            "word": "happy",
+            "weight": 0.028127
           },
           {
             "word": "battery",
-            "weight": 0.087588
+            "weight": 0.016858
+          },
+          {
+            "word": "photography",
+            "weight": 0.0
           },
           {
             "word": "backup",
-            "weight": 0.078988
+            "weight": 0.0
           },
           {
-            "word": "charging",
-            "weight": 0.048716
+            "word": "clarity",
+            "weight": 0.0
           },
           {
-            "word": "support",
-            "weight": 0.039488
+            "word": "road devarabeesanahalli",
+            "weight": 0.0
           },
           {
-            "word": "satisfied",
-            "weight": 0.033449
+            "word": "village",
+            "weight": 0.0
           },
           {
-            "word": "powerbank",
-            "weight": 0.03288
+            "word": "road",
+            "weight": 0.0
           },
           {
-            "word": "fast",
-            "weight": 0.030986
+            "word": "ring road",
+            "weight": 0.0
           },
           {
-            "word": "design",
-            "weight": 0.028421
-          },
-          {
-            "word": "mah",
-            "weight": 0.0232
-          },
-          {
-            "word": "look",
-            "weight": 0.021545
-          },
-          {
-            "word": "premium",
-            "weight": 0.015277
+            "word": "outer",
+            "weight": 0.0
           }
         ]
       },
@@ -513,290 +371,124 @@
         "id": 2,
         "top_words": [
           {
-            "word": "fast",
-            "weight": 0.155827
+            "word": "battery",
+            "weight": 0.103902
           },
           {
-            "word": "fast charging",
-            "weight": 0.152363
+            "word": "audio",
+            "weight": 0.093426
+          },
+          {
+            "word": "earbud",
+            "weight": 0.09064
+          },
+          {
+            "word": "pair",
+            "weight": 0.069137
+          },
+          {
+            "word": "clarity",
+            "weight": 0.066973
           },
           {
             "word": "charging",
-            "weight": 0.140981
+            "weight": 0.064937
           },
           {
-            "word": "premium",
-            "weight": 0.087065
+            "word": "deliver",
+            "weight": 0.064059
           },
           {
-            "word": "design",
-            "weight": 0.064492
-          },
-          {
-            "word": "money",
-            "weight": 0.060255
-          },
-          {
-            "word": "look",
-            "weight": 0.058553
-          },
-          {
-            "word": "support",
-            "weight": 0.055037
+            "word": "powerful",
+            "weight": 0.062891
           },
           {
             "word": "quality",
-            "weight": 0.053151
+            "weight": 0.060186
           },
           {
-            "word": "value money",
-            "weight": 0.053063
+            "word": "battery life",
+            "weight": 0.056675
           },
           {
-            "word": "value",
-            "weight": 0.041222
-          },
-          {
-            "word": "build quality",
-            "weight": 0.034123
-          },
-          {
-            "word": "build",
-            "weight": 0.034123
-          },
-          {
-            "word": "mah",
-            "weight": 0.005112
-          },
-          {
-            "word": "highly",
-            "weight": 0.004631
-          }
-        ]
-      },
-      {
-        "id": 3,
-        "top_words": [
-          {
-            "word": "capacity",
-            "weight": 0.479119
-          },
-          {
-            "word": "mah",
-            "weight": 0.422228
-          },
-          {
-            "word": "charge",
-            "weight": 0.04189
-          },
-          {
-            "word": "satisfied",
-            "weight": 0.022908
-          },
-          {
-            "word": "highly",
-            "weight": 0.015419
-          },
-          {
-            "word": "price",
-            "weight": 0.013538
-          },
-          {
-            "word": "power bank",
-            "weight": 0.002169
-          },
-          {
-            "word": "bank",
-            "weight": 0.002169
-          },
-          {
-            "word": "power",
-            "weight": 0.00056
+            "word": "life",
+            "weight": 0.056675
           },
           {
             "word": "backup",
-            "weight": 0.0
+            "weight": 0.054628
           },
           {
-            "word": "flipkart",
-            "weight": 0.0
+            "word": "happy",
+            "weight": 0.053836
           },
           {
-            "word": "mobile",
-            "weight": 0.0
+            "word": "display",
+            "weight": 0.051383
           },
           {
-            "word": "time",
-            "weight": 0.0
-          },
-          {
-            "word": "battery",
-            "weight": 0.0
-          },
-          {
-            "word": "money",
-            "weight": 0.0
-          }
-        ]
-      },
-      {
-        "id": 4,
-        "top_words": [
-          {
-            "word": "flipkart",
-            "weight": 0.664702
-          },
-          {
-            "word": "price",
-            "weight": 0.260138
-          },
-          {
-            "word": "quality",
-            "weight": 0.044613
-          },
-          {
-            "word": "fast",
-            "weight": 0.030545
-          },
-          {
-            "word": "time",
-            "weight": 2e-06
-          },
-          {
-            "word": "powerbank",
-            "weight": 0.0
-          },
-          {
-            "word": "support",
-            "weight": 0.0
-          },
-          {
-            "word": "battery",
-            "weight": 0.0
-          },
-          {
-            "word": "charging",
-            "weight": 0.0
-          },
-          {
-            "word": "take",
-            "weight": 0.0
-          },
-          {
-            "word": "satisfied",
-            "weight": 0.0
-          },
-          {
-            "word": "value",
-            "weight": 0.0
-          },
-          {
-            "word": "value money",
-            "weight": 0.0
-          },
-          {
-            "word": "premium",
-            "weight": 0.0
-          },
-          {
-            "word": "mobile",
-            "weight": 0.0
+            "word": "photography",
+            "weight": 0.05065
           }
         ]
       }
     ],
     "prevalence": [
-      0.3824,
-      0.2059,
-      0.2353,
-      0.0588,
-      0.1176
+      0.2609,
+      0.1739,
+      0.5652
     ],
     "representative_reviews": {
       "0": [
-        "Battery power bank is many times more than you think. That's why friends, while taking power bank, take this Mai's power bank without thinking.",
-        "Beautiful colour of power bank and nice backup and good quality I love it most people should go for this product it's too good \u2764\ufe0f\u2764\ufe0f\ud83d\udc4d\ud83d\udc4d\ud83e\udd17\ud83e\udd17\ud83e\udd17",
-        "Delivery was faster than expected. Nice power bank It desined very well. At first it was qute confusing. After 2days it was easy to use. Thank u flipkard and MI for such a good product. I am really ... more"
+        "Review for: Color Yellow \u2022 Storage 128 GB",
+        "Review for: Color Black \u2022 Storage 128 GB",
+        "Review for: Color Pink \u2022 Storage 128 GB"
       ],
       "1": [
-        "It takes more time to charge and pb, There are provided normal cable, Not too good, We can charge our mobile 2times(4000 mah) battery, It has quick charge support, They don't provide type-c cable... more",
-        "Reviewing after 1 week of use, Got around 8000 mhz battery backup and take 7 hours to fully charge on 2A charger. Mobile takes little bit more charging time not like 2.4A output its like 1.5A output.... more",
-        "Thanks flipkart..I got it 630 at Big billion offer.. Power backup is excellent almost 8000mh power it back up..my mi A2 almost 2.5times charge after a single full charge... design wise loking good att... more"
+        "Using this Iphone 15 from 1month and it has best Camera",
+        "Switch from OnePlus to iPhone I am stunned with camera performance. Everything is perfect on iPhone 15.",
+        "Amezing camera and all over best phone\ud83d\udc4c"
       ],
       "2": [
-        "Premium design fast charging very slim",
-        "Looks very premium takes 3 to 4 hours to get charged but support fast charging to the devices",
-        "Best metal body power bank good quality and fast charging 18w I like it \ud83d\udc4d"
-      ],
-      "3": [
-        "Review for: Capacity 10000 mAh \u2022 Color Midnight Black",
-        "Review for: Capacity 10000 mAh \u2022 Color Metallic Blue",
-        "Xiaomi Power Bank 4i 10000mAh \u2013 Review \u2b50\u2b50\u2b50\u2b50\u2b50 The Xiaomi Power Bank 4i is a compact and reliable power bank that is perfect for everyday use. Its 10,000mAh capacity provides enough backup to keep your smartphone charged while travelling, working, or during power cuts. The 22.5W fast charging is a gre..."
-      ],
-      "4": [
-        "Flipkart Internet Private Limited, Buildings Alyssa, Begonia & Clove Embassy Tech Village, Outer Ring Road, Devarabeesanahalli Village, Bengaluru, 560103, Karnataka, India",
-        "Flipkart Internet Private Limited,",
-        "Excellent Mi 3i 10000 mAh power bank. Low price but high quality product. Best seller Retail Net No.1 product quality at reasonable price and fast shipping, recommended this seller. Yes Flipkart servi... more"
+        "Impressive audio clarity, comfortable fit, and reliable battery life make these earbuds a smart, affordable choice.",
+        "The heavy audio output from this earbud pair is powerful.",
+        "You get amazing audio quality with this pair today completely."
       ]
     },
     "metrics": {
-      "coherence": 0.4808,
-      "diversity": 0.56,
-      "reconstruction_error": 3.89
+      "coherence": 0.3146,
+      "diversity": 0.7333,
+      "reconstruction_error": 3.65
     },
-    "training_time": 0.02
+    "training_time": 0.03
   },
   "similarity": {
     "matrix": [
       [
-        0.399,
-        0.374,
-        0.381,
-        0.705,
-        0.172
+        0.15,
+        0.133,
+        0.637
       ],
       [
-        0.873,
-        0.186,
-        0.248,
-        0.18,
-        0.309
+        0.628,
+        0.445,
+        0.566
       ],
       [
-        0.315,
-        0.243,
-        0.5,
-        0.124,
-        0.426
-      ],
-      [
-        0.4,
-        0.676,
-        0.439,
-        0.284,
-        0.129
-      ],
-      [
-        0.765,
-        0.52,
-        0.513,
-        0.163,
-        0.037
+        0.128,
+        0.111,
+        0.311
       ]
     ],
     "lda_labels": [
       "LDA Topic 0",
       "LDA Topic 1",
-      "LDA Topic 2",
-      "LDA Topic 3",
-      "LDA Topic 4"
+      "LDA Topic 2"
     ],
     "nmf_labels": [
       "NMF Topic 0",
       "NMF Topic 1",
-      "NMF Topic 2",
-      "NMF Topic 3",
-      "NMF Topic 4"
+      "NMF Topic 2"
     ]
   }
 }
