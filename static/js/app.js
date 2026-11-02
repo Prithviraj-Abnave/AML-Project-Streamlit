@@ -224,7 +224,20 @@ function startScrapeAnalysis() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ urls, n_topics: nTopics, max_pages: maxPages })
     })
-    .then(res => res.json())
+    .then(async res => {
+        const text = await res.text();
+        let data;
+        try {
+            data = JSON.parse(text);
+        } catch (e) {
+            console.error('Non-JSON response from /api/scrape:', text);
+            throw new Error(Server returned HTTP : ...);
+        }
+        if (!res.ok) {
+            throw new Error(data.error || HTTP );
+        }
+        return data;
+    })
     .then(data => {
         if (data.error) {
             showError(data.error);
@@ -276,8 +289,13 @@ function startPolling() {
 
 function pollStatus() {
     fetch(API_BASE + '/api/status')
-        .then(res => res.json())
+        .then(async res => {
+            if (!res.ok) return null;
+            const text = await res.text();
+            try { return JSON.parse(text); } catch (e) { return null; }
+        })
         .then(status => {
+            if (!status) return;
             isCustomRun = status.is_custom;
             updateProgress(status.progress, status.current_step);
             if (status.current_step) appendScrapeLog(status.current_step);
@@ -302,7 +320,19 @@ function pollStatus() {
 function fetchAndRenderResults() {
     const url = isCustomRun ? '/api/custom_results' : '/api/results';
     fetch(API_BASE + url)
-        .then(res => res.json())
+        .then(async res => {
+            const text = await res.text();
+            let data;
+            try {
+                data = JSON.parse(text);
+            } catch (e) {
+                throw new Error(Server returned HTTP : ...);
+            }
+            if (!res.ok) {
+                throw new Error(data.error || HTTP );
+            }
+            return data;
+        })
         .then(data => {
             if (data.error) {
                 showError(data.error);

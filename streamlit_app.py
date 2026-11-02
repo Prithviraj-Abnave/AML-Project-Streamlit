@@ -194,11 +194,27 @@ def _make_starlette_routes():
 
     return [
         Route("/api/status", handle_status, methods=["GET", "OPTIONS"]),
+        Route("/api/status/", handle_status, methods=["GET", "OPTIONS"]),
         Route("/api/results", handle_results, methods=["GET", "OPTIONS"]),
+        Route("/api/results/", handle_results, methods=["GET", "OPTIONS"]),
         Route("/api/custom_results", handle_custom_results, methods=["GET", "OPTIONS"]),
+        Route("/api/custom_results/", handle_custom_results, methods=["GET", "OPTIONS"]),
         Route("/api/scrape", handle_scrape, methods=["POST", "OPTIONS"]),
+        Route("/api/scrape/", handle_scrape, methods=["POST", "OPTIONS"]),
         Route("/api/analyze", handle_analyze, methods=["POST", "OPTIONS"]),
+        Route("/api/analyze/", handle_analyze, methods=["POST", "OPTIONS"]),
     ]
+
+
+# ─────────────────────────────────────────────────────────────
+# Streamlit 1.53+ Native ASGI App (Auto-discovered by Streamlit)
+# ─────────────────────────────────────────────────────────────
+try:
+    from streamlit import App
+
+    app = App("streamlit_app.py", routes=_make_starlette_routes())
+except Exception as _app_exc:
+    app = None
 
 
 def _register_server_routes():
@@ -215,12 +231,13 @@ def _register_server_routes():
                     api_routes = _make_starlette_routes()
                     for r in reversed(api_routes):
                         obj.router.routes.insert(0, r)
-    except Exception:
-        pass
+    except Exception as e:
+        print(f"[Warning] Starlette route registration: {e}")
 
     # 2. Tornado server (fallback for older Streamlit versions)
     try:
         import tornado.web
+        from tornado.routing import PathMatches, Rule
 
         class TornadoStatusHandler(tornado.web.RequestHandler):
             def set_default_headers(self):
@@ -228,6 +245,7 @@ def _register_server_routes():
                     self.set_header(k, v)
 
             def get(self):
+                self.set_header("Content-Type", "application/json")
                 self.write(json.dumps(get_status()))
 
             def options(self):
@@ -239,6 +257,7 @@ def _register_server_routes():
                     self.set_header(k, v)
 
             def get(self):
+                self.set_header("Content-Type", "application/json")
                 data = get_results() or load_cached_results()
                 if not data:
                     self.set_status(404)
@@ -255,6 +274,7 @@ def _register_server_routes():
                     self.set_header(k, v)
 
             def get(self):
+                self.set_header("Content-Type", "application/json")
                 data = load_custom_results()
                 if not data:
                     self.set_status(404)
@@ -265,18 +285,131 @@ def _register_server_routes():
             def options(self):
                 self.set_status(200)
 
+        class TornadoScrapeHandler(tornado.web.RequestHandler):
+            def set_default_headers(self):
+                for k, v in CORS_HEADERS.items():
+                    self.set_header(k, v)
+
+            def options(self):
+                self.set_status(200)
+
+            def post(self):
+                self.set_header("Content-Type", "application/json")
+                current = get_status()
+                if current.get("status") == "running":
+                    self.set_status(409)
+                    self.write(json.dumps({"error": "Pipeline is already running."}))
+                    return
+                try:
+                    body = json.loads(self.request.body.decode("utf-8")) if self.request.body else {}
+                except Exception:
+                    body = {}
+                urls = body.get("urls", [])
+                n_topics = int(body.get("n_topics", 5))
+                max_pages = int(body.get("max_pages", 3))
+
+                urls = [u for u in urls if u and str(u).strip()]
+                if len(urls) < 2:
+                    self.set_status(400)
+                    self.write(json.dumps({"error": "Please provide at least 2 product URLs."}))
+                    return
+                if len(urls) > 4:
+                    self.set_status(400)
+                    self.write(json.dumps({"error": "Maximum 4 URLs are supported."}))
+                    return
+                if n_topics < 2 or n_topics > 20:
+                    self.set_status(400)
+                    self.write(json.dumps({"error": "n_topics must be between 2 and 20."}))
+                    return
+
+                supported_hosts = (
+                    "flipkart.com", "snapdeal.com", "myntra.com",
+                    "amazon.in", "amazon.com", "croma.com", "reliancedigital.in",
+                )
+                for url in urls:
+                    if not any(host in url.lower() for host in supported_hosts):
+                        self.set_status(400)
+                        self.write(json.dumps({
+                            "error": f"Unsupported site in URL: {url}. Supported: Flipkart, Snapdeal, Myntra, Amazon, Croma, Reliance Digital."
+                        }))
+                        return
+
+                _run_scrape_pipeline(urls, n_topics, max_pages)
+                self.write(json.dumps({
+                    "message": "Scraping started.",
+                    "urls": urls,
+                    "n_topics": n_topics,
+                }))
+
+        class TornadoAnalyzeHandler(tornado.web.RequestHandler):
+            def set_default_headers(self):
+                for k, v in CORS_HEADERS.items():
+                    self.set_header(k, v)
+
+            def options(self):
+                self.set_status(200)
+
+            def post(self):
+                self.set_header("Content-Type", "application/json")
+                current = get_status()
+                if current.get("status") == "running":
+                    self.set_status(409)
+                    self.write(json.dumps({"error": "Pipeline is already running."}))
+                    return
+                try:
+                    body = json.loads(self.request.body.decode("utf-8")) if self.request.body else {}
+                except Exception:
+                    body = {}
+                n_topics = int(body.get("n_topics", 5))
+                sample_size = body.get("sample_size")
+                if sample_size is not None:
+                    sample_size = int(sample_size)
+
+                if n_topics < 2 or n_topics > 20:
+                    self.set_status(400)
+                    self.write(json.dumps({"error": "n_topics must be between 2 and 20."}))
+                    return
+                if sample_size is not None and sample_size < 100:
+                    self.set_status(400)
+                    self.write(json.dumps({"error": "sample_size must be at least 100."}))
+                    return
+
+                run_pipeline(n_topics=n_topics, sample_size=sample_size)
+                self.write(json.dumps({
+                    "message": "Pipeline started.",
+                    "n_topics": n_topics,
+                    "sample_size": sample_size,
+                }))
+
+        tornado_rules = [
+            Rule(PathMatches(r"/api/status/?$"), TornadoStatusHandler),
+            Rule(PathMatches(r"/api/results/?$"), TornadoResultsHandler),
+            Rule(PathMatches(r"/api/custom_results/?$"), TornadoCustomResultsHandler),
+            Rule(PathMatches(r"/api/scrape/?$"), TornadoScrapeHandler),
+            Rule(PathMatches(r"/api/analyze/?$"), TornadoAnalyzeHandler),
+        ]
+
         for obj in gc.get_objects():
             if isinstance(obj, tornado.web.Application):
-                obj.add_handlers(
-                    r".*",
-                    [
-                        (r"/api/status", TornadoStatusHandler),
-                        (r"/api/results", TornadoResultsHandler),
-                        (r"/api/custom_results", TornadoCustomResultsHandler),
-                    ],
-                )
-    except Exception:
-        pass
+                try:
+                    target_rules = obj.default_router.rules[0].target.rules
+                    patterns = [getattr(getattr(r, "matcher", None), "regex", getattr(r, "matcher", None)).pattern for r in target_rules if hasattr(getattr(r, "matcher", None), "regex", None)]
+                    if not any("/api/status" in p for p in patterns):
+                        for rule in reversed(tornado_rules):
+                            target_rules.insert(0, rule)
+                except Exception:
+                    obj.add_handlers(
+                        r".*",
+                        [
+                            (r"/api/status/?", TornadoStatusHandler),
+                            (r"/api/results/?", TornadoResultsHandler),
+                            (r"/api/custom_results/?", TornadoCustomResultsHandler),
+                            (r"/api/scrape/?", TornadoScrapeHandler),
+                            (r"/api/analyze/?", TornadoAnalyzeHandler),
+                        ],
+                    )
+    except Exception as e:
+        print(f"[Warning] Tornado route registration: {e}")
 
 
 def _start_flask_background_server():
