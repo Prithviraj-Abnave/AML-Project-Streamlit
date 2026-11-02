@@ -17,6 +17,7 @@
             <li><a href="#" class="nav-link" data-target="compare" onclick="navigateTo('compare')">Compare</a></li>
             <li><a href="#" class="nav-link" data-target="dataset" onclick="navigateTo('dataset')">Dataset</a></li>
             <li><a href="#" class="nav-link" data-target="team" onclick="navigateTo('team')">Team</a></li>
+            <li id="nav-custom-results-li" style="display:none;"><a href="#" class="nav-link" data-target="custom-results" onclick="navigateTo('custom-results')">Custom Results ✨</a></li>
         </ul>
         <button class="navbar-cta" onclick="navigateTo('analyze')">
             + Analyze Your Product
@@ -859,6 +860,27 @@
                 </div>
             </div>
 
+            <!-- Custom Results Notification Banner (Shown when live custom results exist) -->
+            <div id="custom-results-banner" style="display:none; background:#f5f3ff; border:1px solid #ddd6fe; border-radius:var(--radius-md); padding:1rem 1.25rem; margin-bottom:1.5rem; justify-content:space-between; align-items:center;">
+                <div>
+                    <strong style="color:#6d28d9; font-size:0.95rem;">🎉 Latest Model Run Available!</strong>
+                    <p style="margin:0.2rem 0 0 0; font-size:0.83rem; color:#5b21b6;">A live model run using Flipkart (iPhone 15) &amp; Snapdeal (Earbuds) reviews has been processed.</p>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="navigateTo('custom-results')" style="background:#7c3aed; color:white; border:none; padding:0.45rem 1.1rem; border-radius:var(--radius-pill); font-weight:600; cursor:pointer; font-size:0.85rem; white-space:nowrap;">
+                    View Results &rarr;
+                </button>
+            </div>
+
+            <!-- Streamlit Cloud Notice -->
+            <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:var(--radius-md); padding:0.85rem 1.15rem; margin-bottom:1.5rem;">
+                <div style="display:flex; align-items:flex-start; gap:0.6rem;">
+                    <span style="font-size:1.15rem; line-height:1.2;">⚡</span>
+                    <div style="font-size:0.82rem; color:#1e40af; line-height:1.45;">
+                        <strong>Streamlit Cloud Notice:</strong> For live scraping and real-time training progress on Streamlit Cloud, use the <strong>⚡ Live Review Scraper</strong> in the <strong>left sidebar</strong> (click the <strong>&gt;</strong> arrow at the top-left if collapsed).
+                    </div>
+                </div>
+            </div>
+
             <!-- URL Input Card -->
             <div class="card" style="padding:2rem; margin-bottom:1.5rem;">
                 <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.4rem;">
@@ -955,6 +977,9 @@
                         style="width:100%; padding:0.85rem; font-size:1rem; letter-spacing:0.03em;">
                         <span id="btn-scrape-icon">🔍</span> &nbsp;Scrape &amp; Analyze
                     </button>
+                    <p style="font-size:0.8rem; color:var(--text-muted); margin-top:0.75rem; text-align:center;">
+                        💡 Tip: On Streamlit Community Cloud, you can also run live scraping and model training with real-time progress in the <strong>left sidebar</strong>.
+                    </p>
                 </div>
             </div>
 

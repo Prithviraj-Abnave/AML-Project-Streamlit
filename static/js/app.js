@@ -278,8 +278,16 @@ function startScrapeAnalysis() {
         try {
             data = JSON.parse(text);
         } catch (e) {
-            console.error('Non-JSON response from /api/scrape:', text);
-            throw new Error(`Server returned HTTP ${res.status}: non-JSON response`);
+            console.warn('Non-JSON response from /api/scrape:', text.substring(0, 100));
+            appendScrapeLog('💡 Notice: Streamlit Cloud proxy blocked direct POST request.');
+            appendScrapeLog('👉 Please use the "⚡ Live Review Scraper" in the left sidebar.');
+            // Auto-open Streamlit sidebar on Streamlit Community Cloud
+            try {
+                const sidebarToggle = window.parent.document.querySelector('[data-testid="collapsedControl"] button')
+                                   || window.parent.document.querySelector('button[data-testid="stSidebarCollapseButton"]');
+                if (sidebarToggle) sidebarToggle.click();
+            } catch (err) {}
+            throw new Error('On Streamlit Community Cloud, external API requests are blocked by the cloud proxy. Please use the "⚡ Live Review Scraper" in the left sidebar to scrape and train models!');
         }
         if (!res.ok) {
             throw new Error(data.error || `HTTP ${res.status}`);
@@ -296,7 +304,7 @@ function startScrapeAnalysis() {
         startPolling();
     })
     .catch(err => {
-        showError('Failed to start scraping: ' + err.message);
+        showError(err.message || 'Failed to start scraping');
         resetScrapeButton();
     });
 }
@@ -408,20 +416,28 @@ function loadCachedResults() {
     if (window.INITIAL_DATA && !window.INITIAL_DATA.error) {
         currentData = window.INITIAL_DATA;
         renderAllPages(window.INITIAL_DATA);
-        return;
     }
-    fetch(API_BASE + '/api/results')
-        .then(res => {
-            if (res.ok) return res.json();
-            throw new Error('No cached results');
-        })
-        .then(data => {
-            if (!data.error) {
-                currentData = data;
-                renderAllPages(data);
-            }
-        })
-        .catch(() => { /* No cached results */ });
+    if (window.CUSTOM_DATA && !window.CUSTOM_DATA.error && window.CUSTOM_DATA.lda) {
+        renderCustomResults(window.CUSTOM_DATA);
+        const navCustom = document.getElementById('nav-custom-results-li');
+        if (navCustom) navCustom.style.display = 'inline-block';
+        const bannerCustom = document.getElementById('custom-results-banner');
+        if (bannerCustom) bannerCustom.style.display = 'flex';
+    }
+    if (!window.INITIAL_DATA) {
+        fetch(API_BASE + '/api/results')
+            .then(res => {
+                if (res.ok) return res.json();
+                throw new Error('No cached results');
+            })
+            .then(data => {
+                if (!data.error) {
+                    currentData = data;
+                    renderAllPages(data);
+                }
+            })
+            .catch(() => { /* No cached results */ });
+    }
 }
 
 function updateProgress(percent, step) {

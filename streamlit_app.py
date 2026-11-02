@@ -487,9 +487,14 @@ def get_compiled_html():
             chart_replacement,
         )
 
-    # Inline JS and initial precomputed benchmark
+    custom_results_json = "{}"
+    if os.path.exists(CUSTOM_RESULTS_FILE):
+        with open(CUSTOM_RESULTS_FILE, "r", encoding="utf-8") as f:
+            custom_results_json = f.read()
+
+    # Inline JS and precomputed benchmarks
     js_replacement = (
-        f"<script>\nwindow.INITIAL_DATA = {results_json};\n</script>\n"
+        f"<script>\nwindow.INITIAL_DATA = {results_json};\nwindow.CUSTOM_DATA = {custom_results_json};\n</script>\n"
         f"<script>\n{js_content}\n</script>"
     )
     html_content = html_content.replace(
@@ -509,17 +514,22 @@ def main():
         page_title="Topic Analysis | LDA vs NMF",
         page_icon="📊",
         layout="wide",
-        initial_sidebar_state="collapsed",
+        initial_sidebar_state="expanded",
     )
 
     # Ensure API routes are registered on Streamlit's web server
     _register_server_routes()
     _start_flask_background_server()
 
-    # CSS styling to keep Streamlit header & Deploy button visible while dashboard fills the screen below
+    # CSS styling to keep Streamlit header, sidebar & Deploy button visible while dashboard fills the screen below
     st.markdown(
         """
         <style>
+            /* Main background transparent so iframe shows through */
+            .stApp, section.main, .block-container {
+                background: transparent !important;
+            }
+
             /* Ensure Streamlit header, toolbar, and Deploy button remain visible and accessible */
             header[data-testid="stHeader"] {
                 display: flex !important;
@@ -541,32 +551,112 @@ def main():
                 z-index: 1000001 !important;
             }
 
+            /* Sidebar styling */
+            section[data-testid="stSidebar"] {
+                z-index: 1000002 !important;
+                background: #fdfcfb !important;
+                border-right: 1px solid #e7e5e4 !important;
+            }
+
+            div[data-testid="collapsedControl"] {
+                z-index: 1000003 !important;
+                top: 0.5rem !important;
+                left: 0.75rem !important;
+            }
+
             /* Hide bottom footer */
             footer { display: none !important; }
 
-            /* Remove padding around main container */
+            /* Clean full-width main container */
             .block-container {
-                padding: 0 !important;
-                margin: 0 !important;
-                max-width: 100vw !important;
+                padding-top: 3.5rem !important;
+                padding-bottom: 0 !important;
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                max-width: 100% !important;
             }
 
-            /* Position dashboard full-width directly below the Streamlit header */
-            iframe {
-                position: fixed !important;
-                top: 3.25rem !important;
-                left: 0 !important;
-                width: 100vw !important;
-                height: calc(100vh - 3.25rem) !important;
+            /* Custom component wrapper and iframe fill width and height cleanly */
+            div[data-testid="stCustomComponentV1"] {
+                width: 100% !important;
+            }
+            div[data-testid="stCustomComponentV1"] iframe {
+                width: 100% !important;
+                height: 92vh !important;
                 border: none !important;
-                margin: 0 !important;
-                padding: 0 !important;
-                z-index: 99999 !important;
             }
         </style>
         """,
         unsafe_allow_html=True,
     )
+
+    # ── Sidebar Native Scraper & Model Runner ───────────────────────────
+    with st.sidebar:
+        st.markdown("## ⚡ Live Review Scraper")
+        st.caption(
+            "Scrape customer reviews from Flipkart & Snapdeal and train **LDA vs NMF** models live."
+        )
+
+        col_p1, col_p2 = st.columns(2)
+        with col_p1:
+            if st.button("📋 Saved Links", key="sb_btn_saved", use_container_width=True):
+                st.session_state["sb_u1"] = "https://www.flipkart.com/apple-iphone-15-black-128-gb/p/itm6ac6485515ae4?pid=MOBGTAGPTB3VS24W"
+                st.session_state["sb_u2"] = "https://www.snapdeal.com/product/life-like-a10-pro-in/661262075466"
+                st.rerun()
+        with col_p2:
+            if st.button("🔄 Clear", key="sb_btn_clear", use_container_width=True):
+                st.session_state["sb_u1"] = ""
+                st.session_state["sb_u2"] = ""
+                st.rerun()
+
+        if "sb_u1" not in st.session_state:
+            st.session_state["sb_u1"] = "https://www.flipkart.com/apple-iphone-15-black-128-gb/p/itm6ac6485515ae4?pid=MOBGTAGPTB3VS24W"
+        if "sb_u2" not in st.session_state:
+            st.session_state["sb_u2"] = "https://www.snapdeal.com/product/life-like-a10-pro-in/661262075466"
+
+        u1 = st.text_input("Product URL 1 (Flipkart)", key="sb_u1")
+        u2 = st.text_input("Product URL 2 (Snapdeal)", key="sb_u2")
+
+        c_k, c_p = st.columns(2)
+        with c_k:
+            sb_n_topics = st.slider("Topics (k)", min_value=2, max_value=8, value=3, key="sb_slider_k")
+        with c_p:
+            sb_max_pages = st.slider("Pages", min_value=1, max_value=3, value=1, key="sb_slider_p")
+
+        run_sb = st.button("🚀 Scrape & Train Models", key="sb_btn_run", type="primary", use_container_width=True)
+
+        if run_sb:
+            sb_urls = [u.strip() for u in [u1, u2] if u and u.strip()]
+            if len(sb_urls) < 2:
+                st.error("Please enter at least 2 product URLs.")
+            else:
+                with st.status("Running Scraper & Model Pipeline...", expanded=True) as status_box:
+                    try:
+                        st.write("🕷️ Scraping reviews from e-commerce sites...")
+                        from ml.scraper import scrape_reviews
+                        df_scraped = scrape_reviews(sb_urls, max_pages=sb_max_pages)
+                        st.write(f"✅ Scraped {len(df_scraped)} reviews from {df_scraped['source'].nunique()} site(s).")
+                        
+                        csv_path = os.path.join(UPLOADS_DIR, "scraped_reviews.csv")
+                        df_scraped.to_csv(csv_path, index=False)
+                        
+                        st.write("⚙️ Preprocessing text & building matrices...")
+                        st.write("🧠 Training LDA & NMF topic models...")
+                        from ml.pipeline import _run_pipeline_worker, _set_is_custom
+                        _set_is_custom(True)
+                        _run_pipeline_worker(
+                            n_topics=sb_n_topics,
+                            sample_size=None,
+                            data_path=csv_path,
+                            is_custom=True,
+                        )
+                        status_box.update(label="🎉 Pipeline Complete! Reloading dashboard...", state="complete")
+                        st.success("Models trained successfully! Updating dashboard...")
+                        st.cache_data.clear()
+                        st.rerun()
+                    except Exception as err:
+                        status_box.update(label="Scraping/Pipeline Failed", state="error")
+                        st.error(f"Error: {err}")
 
     compiled_html = get_compiled_html()
     components.html(compiled_html, height=1000, scrolling=True)

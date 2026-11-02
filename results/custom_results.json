@@ -4,7 +4,7 @@
     "processed_reviews": 23,
     "sample_size": null,
     "n_topics": 3,
-    "total_time": 16.37,
+    "total_time": 15.21,
     "vocabulary_size_bow": 38,
     "vocabulary_size_tfidf": 38
   },
@@ -233,7 +233,7 @@
       "diversity": 0.9667,
       "perplexity": 68.23
     },
-    "training_time": 5.28
+    "training_time": 5.13
   },
   "nmf": {
     "topics": [
@@ -460,7 +460,7 @@
       "diversity": 0.7333,
       "reconstruction_error": 3.65
     },
-    "training_time": 0.03
+    "training_time": 0.01
   },
   "similarity": {
     "matrix": [
