@@ -31,6 +31,7 @@ RESULTS_FILE = os.path.join(BASE_DIR, "results", "results.json")
 CUSTOM_RESULTS_FILE = os.path.join(BASE_DIR, "results", "custom_results.json")
 CSS_FILE = os.path.join(BASE_DIR, "static", "css", "style.css")
 JS_FILE = os.path.join(BASE_DIR, "static", "js", "app.js")
+CHART_JS_FILE = os.path.join(BASE_DIR, "static", "js", "chart.min.js")
 UPLOADS_DIR = os.path.join(BASE_DIR, "uploads")
 os.makedirs(UPLOADS_DIR, exist_ok=True)
 
@@ -453,6 +454,11 @@ def get_compiled_html():
         with open(CSS_FILE, "r", encoding="utf-8") as f:
             css_content = f.read()
 
+    chart_js_content = ""
+    if os.path.exists(CHART_JS_FILE):
+        with open(CHART_JS_FILE, "r", encoding="utf-8") as f:
+            chart_js_content = f.read()
+
     js_content = ""
     if os.path.exists(JS_FILE):
         with open(JS_FILE, "r", encoding="utf-8") as f:
@@ -468,6 +474,18 @@ def get_compiled_html():
     html_content = html_content.replace(
         '<link rel="stylesheet" href="css/style.css">', css_replacement
     )
+
+    # Inline Chart.js bundle so graphs render 100% reliably without CDN latency or blockers
+    if chart_js_content:
+        chart_replacement = f"<script>\n{chart_js_content}\n</script>"
+        html_content = html_content.replace(
+            '<script src="js/chart.min.js"></script>',
+            chart_replacement,
+        )
+        html_content = html_content.replace(
+            '<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>',
+            chart_replacement,
+        )
 
     # Inline JS and initial precomputed benchmark
     js_replacement = (

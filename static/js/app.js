@@ -53,12 +53,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Default chart configuration (font)
-    Chart.defaults.font.family = "'Inter', sans-serif";
-    Chart.defaults.color = COLORS.text;
-    
-    // Try loading cached results on page load
-    loadCachedResults();
+    // Default chart configuration & data loading
+    function initChartsAndData() {
+        if (typeof Chart !== 'undefined') {
+            try {
+                Chart.defaults.font.family = "'Inter', sans-serif";
+                Chart.defaults.color = COLORS.text;
+            } catch (e) {}
+        }
+        loadCachedResults();
+    }
+
+    if (typeof Chart !== 'undefined') {
+        initChartsAndData();
+    } else {
+        let attempts = 0;
+        const checkChart = setInterval(() => {
+            attempts++;
+            if (typeof Chart !== 'undefined') {
+                clearInterval(checkChart);
+                initChartsAndData();
+            } else if (attempts > 30) {
+                clearInterval(checkChart);
+                loadCachedResults();
+            }
+        }, 100);
+    }
     
     // File upload events
     const dropzone = document.getElementById('dropzone');
@@ -106,8 +126,17 @@ function navigateTo(pageId, ev) {
     const targetPage = document.getElementById('page-' + pageId);
     if (targetPage) {
         targetPage.style.display = 'block';
-        // Small timeout to allow display:block to apply before adding active for animations
-        setTimeout(() => targetPage.classList.add('active'), 10);
+        setTimeout(() => {
+            targetPage.classList.add('active');
+            targetPage.querySelectorAll('canvas').forEach(canvas => {
+                if (canvas.id && chartInstances[canvas.id]) {
+                    try {
+                        chartInstances[canvas.id].resize();
+                    } catch (e) {}
+                }
+            });
+            window.dispatchEvent(new Event('resize'));
+        }, 30);
     }
 
     // Update nav links
@@ -231,10 +260,10 @@ function startScrapeAnalysis() {
             data = JSON.parse(text);
         } catch (e) {
             console.error('Non-JSON response from /api/scrape:', text);
-            throw new Error(Server returned HTTP : ...);
+            throw new Error(`Server returned HTTP ${res.status}: non-JSON response`);
         }
         if (!res.ok) {
-            throw new Error(data.error || HTTP );
+            throw new Error(data.error || `HTTP ${res.status}`);
         }
         return data;
     })
@@ -326,10 +355,10 @@ function fetchAndRenderResults() {
             try {
                 data = JSON.parse(text);
             } catch (e) {
-                throw new Error(Server returned HTTP : ...);
+                throw new Error(`Server returned HTTP ${res.status}: non-JSON response`);
             }
             if (!res.ok) {
-                throw new Error(data.error || HTTP );
+                throw new Error(data.error || `HTTP ${res.status}`);
             }
             return data;
         })

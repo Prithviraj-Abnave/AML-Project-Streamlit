@@ -680,10 +680,19 @@ h4 {
 .chart-wrapper {
     position: relative;
     width: 100%;
+    height: 320px;
+    min-height: 280px;
 }
 
 .chart-wrapper canvas {
+    display: block;
     width: 100% !important;
+    height: 100% !important;
+}
+
+.hero-chart .chart-wrapper {
+    height: 270px;
+    min-height: 240px;
 }
 
 /* ── Tab Pills ─────────────────────────────────────────────── */

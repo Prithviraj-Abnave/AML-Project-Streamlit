@@ -11,8 +11,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <!-- Chart.js (Local Bundle for offline & high reliability) -->
+    <script src="{{ url_for('static', filename='js/chart.min.js') }}"></script>
 
     <!-- App CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
